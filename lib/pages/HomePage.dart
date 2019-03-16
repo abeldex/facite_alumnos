@@ -1,16 +1,11 @@
-import 'dart:math';
 
+import 'dart:ui' as ui;
+import 'package:facite_alumnos/models/actividades.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(new MyApp());
-
-var COLORS = [
-  Color(0xFFEF7A85),
-  Color(0xFFFF90B3),
-  Color(0xFFFFC2E2),
-  Color(0xFFB892FF),
-  Color(0xFFB892FF)
-];
 
 class MyApp extends StatelessWidget {
   @override
@@ -19,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Facite Alumnos',
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blueGrey,
       ),
       home: new MyHomePage(title: 'Actividades de Libre Eleccion'),
     );
@@ -36,174 +31,161 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var data = [
-    {
-      "title": "Hey Flutterers, See what I did with Flutter",
-      "content": "This is just a text description of the item",
-      "color": COLORS[new Random().nextInt(5)],
-      "image": "https://picsum.photos/200?random"
-    },
-    {
-      "title": "Hey Flutterers, See what I did with Flutter",
-      "content": "This is just a text description of the item",
-      "color": COLORS[new Random().nextInt(5)],
-      "image": "https://picsum.photos/100?random"
-    },
-    {
-      "title": "Hey Flutterers, See what I did with Flutter",
-      "content": "This is just a text description of the item",
-      "color": COLORS[new Random().nextInt(5)],
-      "image": "https://picsum.photos/150?random"
-    },
-    {
-      "title": "Hey Flutterers, See what I did with Flutter",
-      "content": "This is just a text description of the item",
-      "color": COLORS[new Random().nextInt(5)],
-      "image": "https://picsum.photos/125?random"
-    },
-    {
-      "title": "Hey Flutterers, See what I did with Flutter",
-      "content": "This is just a text description of the item",
-      "color": COLORS[new Random().nextInt(5)],
-      "image": "https://picsum.photos/175?random"
-    },
-    {
-      "title": "Hey Flutterers, See what I did with Flutter",
-      "content": "This is just a text description of the item",
-      "color": COLORS[new Random().nextInt(5)],
-      "image": "https://picsum.photos/225?random"
-    },
-    {
-      "title": "Hey Flutterers, See what I did with Flutter",
-      "content": "This is just a text description of the item",
-      "color": COLORS[new Random().nextInt(5)],
-      "image": "https://picsum.photos/250?random"
-    },
-    {
-      "title": "Hey Flutterers, See what I did with Flutter",
-      "content": "This is just a text description of the item",
-      "color": COLORS[new Random().nextInt(5)],
-      "image": "https://picsum.photos/350?random"
-    },
-    {
-      "title": "Hey Flutterers, See what I did with Flutter",
-      "content": "This is just a text description of the item",
-      "color": COLORS[new Random().nextInt(5)],
-      "image": "https://picsum.photos/275?random"
-    },
-    {
-      "title": "Hey Flutterers, See what I did with Flutter",
-      "content": "This is just a text description of the item",
-      "color": COLORS[new Random().nextInt(5)],
-      "image": "https://picsum.photos/300?random"
-    },
-    {
-      "title": "Hey Flutterers, See what I did with Flutter",
-      "content": "This is just a text description of the item",
-      "color": COLORS[new Random().nextInt(5)],
-      "image": "https://picsum.photos/325?random"
-    }
-  ];
+    var url = "http://facite.uas.edu.mx/alumnos/api/api_get_actividades.php";
+    ModelActividades actividades;
+    List<FACITEAPP> actividad;
+    @override
+      void initState() {
+        super.initState();
+        obtenerDatos();
+      }
 
+    obtenerDatos() async {
+    var res = await http.get(url);
+      //print(res.body);
+      var decodedJSON = jsonDecode(res.body);
+      actividades = ModelActividades.fromJson(decodedJSON);
+      //print(home.toJson());
+      setState(() {
+        actividad = actividades.fACITEAPP.toList();
+      });
+    }
+ 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      backgroundColor: Colors.white,
-      appBar: new AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-                 'assets/img/loguito.png',
-                  fit: BoxFit.contain,
-                  height: 32,
-              ),
+    return new Container(
+      child: new Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          new Image.network('http://facite.uas.edu.mx/alumnos/images/slide3.png', fit: BoxFit.cover,),
+          new Scaffold(
+            appBar: new AppBar(
+              title: new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   Image.asset('assets/img/loguito.png',
+                      fit: BoxFit.contain,
+                      height: 32,
+                  ),
                   Container(
                     padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-            widget.title,
-            style: TextStyle(color: Colors.white),
-          ),
-                  ),
-          ],
-        ),
+                          child: Text(widget.title,
+                          style: TextStyle(color: Colors.white,  shadows: <Shadow>[
+      Shadow(
+        offset: Offset(1, 1),
+        blurRadius: 6.0,
+        color: Color.fromARGB(255, 0, 0, 0),
       ),
-      body: new Stack(
+    ],),
+                    ),
+                  ),
+                 ],
+              ),
+              elevation: 0.0,
+              backgroundColor: const Color(0xFFB4C56C).withOpacity(0.0),
+            ),
+            backgroundColor: Colors.transparent,
+            body: new Stack(
         children: <Widget>[
-          new Transform.translate(
-            offset: new Offset(0.0, MediaQuery.of(context).size.height * 0.1050),
-            child: new ListView.builder(
-              shrinkWrap: true,
-              padding: const EdgeInsets.all(0.0),
-              scrollDirection: Axis.vertical,
-              primary: true,
-              itemCount: data.length,
-              itemBuilder: (BuildContext content, int index) {
-                return AwesomeListItem(
-                    title: data[index]["title"],
-                    content: data[index]["content"],
-                    color: data[index]["color"]
+          new BackdropFilter(
+                filter: new ui.ImageFilter.blur(
+                  sigmaX: 0.0,
+                  sigmaY: 0.0,
+                ),
+                      child: new Transform.translate(
+              offset: new Offset(0.0, MediaQuery.of(context).size.height * 0.08),
+              child: actividades == null ? Center(child: CircularProgressIndicator(),) : Card(
+                
+                shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+                  child: new ListView.builder(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(0.0),
+                  scrollDirection: Axis.vertical,
+                  primary: true,
+                  itemCount: actividad.length,
+                  itemBuilder: (BuildContext content, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 10.0, left: 5),
+                                        child: AwesomeListItem(
+                          title: actividad[index].nombreActividad,
+                          content: actividad[index].definicion
+                          ),
                     );
-              },
+                  },
+                ),
+              ),
             ),
           ),
 
           new Transform.translate(
             offset: Offset(0.0, -56.0),
+            
             child: new Container(
-              child: new ClipPath(
-                clipper: new MyClipper(),
-                child: new Stack(
-                  children: [
-                    new Image.asset(
-                      "assets/img/cabecera22.png",
-                      fit: BoxFit.cover,
-                    ),
-                    new Opacity(
-                      opacity: 0.2,
-                      child: new Container(color: Colors.blueGrey),
-                    ),
-                    new Transform.translate(
-                      offset: Offset(0.0, 50.0),
-                      child: new ListTile(
-                        leading: new CircleAvatar(
-                          child: new Container(
-                            decoration: new BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.transparent,
-                              image: new DecorationImage(
-                                fit: BoxFit.fill,
-                                image: NetworkImage(
-                                    "http://facite.uas.edu.mx/alumnos/images/default.png"),
-                              ),
+              height: 100.00,
+              child: new Stack(
+                children: [
+                  
+                  new Opacity(
+                    opacity: 0.2,
+                    child: new Container(color: Colors.transparent,),
+                  ),
+                  new Transform.translate(
+                    offset: Offset(0.0, 40.0),
+                    child: new ListTile(
+                      leading: new CircleAvatar(
+                        child: new Container(
+                          decoration: new BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.transparent,
+                            image: new DecorationImage(
+                              fit: BoxFit.fill,
+                              image: NetworkImage(
+                                  "http://facite.uas.edu.mx/alumnos/images/default.png"),
                             ),
                           ),
                         ),
-                        title: new Text(
-                          "Jesus Abel Cota Dimas",
-                          style: new TextStyle(
-                              color: Colors.white,
-                              fontSize: 24.0,
-                              letterSpacing: 2.0),
-                        ),
-                        subtitle: new Text(
-                          "09193553",
-                          style: new TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.0,
-                              letterSpacing: 2.0),
-                        ),
+                      ),
+                      title: new Text(
+                        "Jesus Abel Cota Dimas",
+                        style: new TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            shadows: <Shadow>[
+                      Shadow(
+                        offset: Offset(1, 1),
+                        blurRadius: 6.0,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                    ],
+    ),
+                      ),
+                      subtitle: new Text(
+                        "09193553",
+                        style: new TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.0,
+                            fontStyle: FontStyle.italic, shadows: <Shadow>[
+                      Shadow(
+                        offset: Offset(1, 1),
+                        blurRadius: 6.0,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                    ],),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           )
         ],
       ),
+                        
+          ),
+        ],
+      )
     );
   }
 }
@@ -228,9 +210,9 @@ class MyClipper extends CustomClipper<Path> {
 class AwesomeListItem extends StatefulWidget {
   String title;
   String content;
-  Color color;
 
-  AwesomeListItem({this.title, this.content, this.color});
+
+  AwesomeListItem({this.title, this.content});
 
   @override
   _AwesomeListItemState createState() => new _AwesomeListItemState();
@@ -241,29 +223,29 @@ class _AwesomeListItemState extends State<AwesomeListItem> {
   Widget build(BuildContext context) {
     return new Row(
       children: <Widget>[
-        new Container(width: 10.0, height: 130.0, color: widget.color),
         new Expanded(
           child: new Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
             child: new Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 new Text(
                   widget.title,
                   style: TextStyle(
-                      color: Colors.grey.shade800,
+                      color: Colors.blueGrey,
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold),
                 ),
                 new Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
+                  padding: const EdgeInsets.only(top: 10.0),
                   child: new Text(
                     widget.content,
+                    textAlign: TextAlign.justify,
                     style: TextStyle(
-                        color: Colors.grey.shade500,
+                        color: Colors.grey,
                         fontSize: 12.0,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.normal,),
                   ),
                 ),
               ],
