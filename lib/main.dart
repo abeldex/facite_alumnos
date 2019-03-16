@@ -1,4 +1,5 @@
 import 'package:facite_alumnos/auth/auth_page.dart';
+import 'package:facite_alumnos/pages/HomePage.dart';
 import 'package:facite_alumnos/pages/home_screen.dart';
 import 'package:facite_alumnos/pages/intro_screen.dart';
 import 'package:facite_alumnos/pages/splash_screen.dart';
@@ -14,5 +15,5 @@ void main() => runApp(new MaterialApp(
     theme:
         ThemeData(primaryColor: Colors.red, accentColor: Colors.yellowAccent),
     debugShowCheckedModeBanner: false,
-    home: SplashScreen(),
+    home: MyApp(),
 routes: routes));

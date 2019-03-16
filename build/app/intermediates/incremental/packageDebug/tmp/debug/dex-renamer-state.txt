@@ -1,4 +1,4 @@
-#Tue Mar 12 16:20:29 MST 2019
-base.0=C\:\\src\\proyectos\\facite_alumnos\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+#Fri Mar 15 23:15:01 MST 2019
+base.0=C\:\\Users\\Abel\\Documents\\Flutter\\facite_alumnos\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

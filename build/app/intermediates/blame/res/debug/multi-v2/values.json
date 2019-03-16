@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\src\\proyectos\\facite_alumnos\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\Abel\\Documents\\Flutter\\facite_alumnos\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "C:\\src\\proyectos\\facite_alumnos\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\Users\\Abel\\Documents\\Flutter\\facite_alumnos\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
