@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage("http://facite.uas.edu.mx/img/cabecera222.png"), fit: BoxFit.cover),
+              image: DecorationImage(image: AssetImage("assets/img/blue_bg.png"), fit: BoxFit.cover),
               color: Colors.blueGrey),
           ),
           Column(

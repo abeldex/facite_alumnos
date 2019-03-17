@@ -32,8 +32,7 @@ class _AuthpageState extends State<AuthPage> {
         decoration: BoxDecoration(
           color: Colors.black,
           image: DecorationImage(
-            image: NetworkImage(
-              'http://facite.uas.edu.mx/img/cabecera222.png',
+            image: AssetImage("assets/img/blue_bg.png",
             ),
             fit: BoxFit.cover,
             // colorFilter: ColorFilter.mode(

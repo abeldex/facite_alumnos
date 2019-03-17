@@ -4,6 +4,9 @@ import 'package:facite_alumnos/models/actividades.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
+
+
 
 void main() => runApp(new MyApp());
 
@@ -34,6 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
     var url = "http://facite.uas.edu.mx/alumnos/api/api_get_actividades.php";
     ModelActividades actividades;
     List<FACITEAPP> actividad;
+    
+    int currentPage = 0;
+    GlobalKey bottomNavigationKey = GlobalKey();
+
     @override
       void initState() {
         super.initState();
@@ -57,9 +64,13 @@ class _MyHomePageState extends State<MyHomePage> {
       child: new Stack(
         fit: StackFit.expand,
         children: <Widget>[
-          new Image.network('http://facite.uas.edu.mx/alumnos/images/slide3.png', fit: BoxFit.cover,),
+
+          new Image.asset('assets/img/blue_bg.png', fit: BoxFit.cover,),
+          //new Image.network('http://facite.uas.edu.mx/alumnos/images/slide3.png', fit: BoxFit.cover,),
+          
           new Scaffold(
             appBar: new AppBar(
+              
               title: new Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                  children: [
@@ -71,12 +82,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.all(8.0),
                           child: Text(widget.title,
                           style: TextStyle(color: Colors.white,  shadows: <Shadow>[
-      Shadow(
-        offset: Offset(1, 1),
-        blurRadius: 6.0,
-        color: Color.fromARGB(255, 0, 0, 0),
-      ),
-    ],),
+                            Shadow(
+                              offset: Offset(1, 1),
+                              blurRadius: 6.0,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            ),
+                          ],),
                     ),
                   ),
                  ],
@@ -97,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: actividades == null ? Center(child: CircularProgressIndicator(),) : Card(
                 
                 shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.circular(30.0),
               ),
                   child: new ListView.builder(
                   shrinkWrap: true,
@@ -133,7 +144,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   new Transform.translate(
                     offset: Offset(0.0, 40.0),
-                    child: new ListTile(
+                    child: 
+                    new ListTile(
                       leading: new CircleAvatar(
                         child: new Container(
                           decoration: new BoxDecoration(
@@ -175,14 +187,40 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],),
                       ),
                     ),
+                    
                   ),
                 ],
+                
               ),
+              
             ),
           )
         ],
       ),
-                        
+          /*bottomNavigationBar: CurvedNavigationBar(
+            backgroundColor: Colors.grey,
+            items: <Widget>[
+              Icon(Icons.local_activity, size: 40),
+              Icon(Icons.list, size: 40),
+              Icon(Icons.compare_arrows, size: 40),
+            ],
+            onTap: (index) {
+              //Handle button tap
+            },
+          ),*/   
+          bottomNavigationBar: FancyBottomNavigation(
+                  tabs: [
+                      TabData(iconData: Icons.home, title: "Inicio"),
+                      TabData(iconData: Icons.receipt, title: "Actividades"),
+                      TabData(iconData: Icons.check_circle, title: "Creditos"),
+                      TabData(iconData: Icons.insert_drive_file, title: "Documentos")
+                  ],
+                  onTabChangedListener: (position) {
+                      setState(() {
+                      currentPage = position;
+                      });
+                  },
+              ),             
           ),
         ],
       )

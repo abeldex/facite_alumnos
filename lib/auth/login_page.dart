@@ -1,3 +1,4 @@
+import 'package:facite_alumnos/pages/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:facite_alumnos/utils/utils.dart';
 
@@ -110,10 +111,10 @@ class _LoginState extends State<LoginPage> {
             textColor: Colors.white,
             child: Text('Ingresar'),
             onPressed: () {
-              // Navigator.pushReplacement(   // replcet the curent layout unlike push that just creates new page
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (BuildContext cotext) => HomePage()));
+              Navigator.pushReplacement(   // replcet the curent layout unlike push that just creates new page
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext cotext) => MyApp()));
 
               // Using Routes
 
