@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
-
+import 'package:facite_alumnos/globals.dart' as globals;
 
 
 void main() => runApp(new MyApp());
@@ -160,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       title: new Text(
-                        "Jesus Abel Cota Dimas",
+                        "${globals.nombre}",
                         style: new TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,
@@ -174,11 +174,11 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
                       ),
                       subtitle: new Text(
-                        "09193553",
+                        "${globals.cuenta}",
                         style: new TextStyle(
                             color: Colors.white,
                             fontSize: 12.0,
-                            fontStyle: FontStyle.italic, shadows: <Shadow>[
+                            fontStyle: FontStyle.normal, shadows: <Shadow>[
                       Shadow(
                         offset: Offset(1, 1),
                         blurRadius: 6.0,

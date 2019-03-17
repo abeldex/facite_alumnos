@@ -1,6 +1,12 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
+import 'package:facite_alumnos/models/ModelLogin.dart';
 import 'package:facite_alumnos/pages/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:facite_alumnos/utils/utils.dart';
+import 'package:facite_alumnos/globals.dart' as globals;
+import 'package:http/http.dart' as http;
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class LoginPage extends StatefulWidget {
   final Function changePage;
@@ -16,10 +22,85 @@ class LoginPage extends StatefulWidget {
 class _LoginState extends State<LoginPage> {
   final Function _changePage;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final Map<String, dynamic> _loginData = {
     'email' : null,
     'password' : Null
   };
+
+  
+
+  
+
+   //Metodo para realizar el login
+  _login() async {
+   final response = await http.get("http://facite.uas.edu.mx/alumnos/api/api_login.php?cuenta=${_loginData['email']}&password=${_loginData['password']}");
+  var datauser = json.decode(response.body);
+  //print(datauser);
+  List<FACITEAPP> e;
+  e = (datauser['FACITE_APP'] as List)
+      .map((p) => FACITEAPP.fromJson(p))
+      .toList();
+  String msg='';
+  if(datauser.length==0){
+    setState(() {
+          msg="No se pudo conectar al servidor";
+          _showDialog(msg, 'Error del servidor');
+        });
+  }else{
+    if(e[0].success=='0'){
+      //_showDialog(msg, 'Usuario o contrasena incorrectas');
+      Alert(
+                      context: context,
+                      //type: AlertType.info,
+                      title: "Fallo al iniciar sesion",
+                      desc: "Usuario o Contrasena Incorrectas",
+                      image: Image.asset("assets/img/error.gif", width: 50,),
+                      buttons: [
+                        DialogButton(
+                          child: Text(
+                            "Cerrar!",
+                            style: TextStyle(color: Colors.white, fontSize: 20,),
+                          ),
+                           onPressed: () => Navigator.pop(context),
+                          width: 140,
+                        ),
+                       
+                      ],
+                    ).show();
+    }else if(e[0].success=='1'){
+      
+      //_showDialog("buala vas a iniciar sesion","${e[0].name}");
+      Navigator.pushReplacementNamed(context, '/home');
+    }
+    
+    setState(() {
+          globals.cuenta = e[0].cuenta;
+          globals.nombre = e[0].name;
+        });
+  }
+}
+
+_showDialog(String mensaje, String titulo) async {
+    await showDialog<String>(
+      context: context,
+      child: new AlertDialog(
+        contentPadding: const EdgeInsets.all(20.0),
+        title: new Text(titulo),
+        content: new Text(mensaje),
+        actions: <Widget>[
+          new FlatButton(
+              child: const Text('Cerrar'),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+        ],
+      ),
+    );
+  }
+
+
+
 
   _LoginState(this._changePage);
 
@@ -111,11 +192,11 @@ class _LoginState extends State<LoginPage> {
             textColor: Colors.white,
             child: Text('Ingresar'),
             onPressed: () {
-              Navigator.pushReplacement(   // replcet the curent layout unlike push that just creates new page
+              /*Navigator.pushReplacement(   // replcet the curent layout unlike push that just creates new page
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext cotext) => MyApp()));
-
+              */
               // Using Routes
 
               _formKey.currentState.save();
@@ -123,7 +204,8 @@ class _LoginState extends State<LoginPage> {
               if (!_formKey.currentState.validate()) {
                 return;
               } else {
-                Navigator.pushReplacementNamed(context, '/home');
+                //Navigator.pushReplacementNamed(context, '/home');
+                _login();
               }
             },
           ),
