@@ -1,11 +1,15 @@
 
 import 'dart:ui' as ui;
-import 'package:facite_alumnos/models/actividades.dart';
+import 'package:facite_alumnos/models/ModelActividades.dart';
+import 'package:facite_alumnos/models/ModelCreditos.dart';
+import 'package:facite_alumnos/pages/actividades.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:facite_alumnos/globals.dart' as globals;
+import 'package:flutter_html/flutter_html.dart';
+import 'package:html/dom.dart' as dom;
 
 
 void main() => runApp(new MyApp());
@@ -34,27 +38,48 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-    var url = "http://facite.uas.edu.mx/alumnos/api/api_get_actividades.php";
-    ModelActividades actividades;
-    List<FACITEAPP> actividad;
+    //para los creditos
+    var url = "http://facite.uas.edu.mx/alumnos/api/ap_get_creditos.php?cuenta=" + "${globals.cuenta}";
     
+    ModelCreditos creditos;
+    List<FACITEAPP> actividad;
+
+    //para las actividades
+    var url_a = "http://facite.uas.edu.mx/alumnos/api/api_get_actividades.php";
+    ModelActividades actividades;
+    List<FACITEAPP_ACT> actividad_a;
+
     int currentPage = 0;
+
     GlobalKey bottomNavigationKey = GlobalKey();
 
     @override
       void initState() {
         super.initState();
         obtenerDatos();
+        obtenerActividades() ;
+        //print(url);
       }
 
     obtenerDatos() async {
     var res = await http.get(url);
+      print(res.body);
+      var decodedJSON = jsonDecode(res.body);
+      creditos = ModelCreditos.fromJson(decodedJSON);
+      //print(home.toJson());
+      setState(() {
+        actividad = creditos.fACITEAPP.toList();
+      });
+    }
+
+    obtenerActividades() async {
+    var res = await http.get(url_a);
       //print(res.body);
       var decodedJSON = jsonDecode(res.body);
       actividades = ModelActividades.fromJson(decodedJSON);
       //print(home.toJson());
       setState(() {
-        actividad = actividades.fACITEAPP.toList();
+        actividad_a = actividades.fACITEAPP.toList();
       });
     }
  
@@ -67,9 +92,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
           new Image.asset('assets/img/blue_bg.png', fit: BoxFit.cover,),
           //new Image.network('http://facite.uas.edu.mx/alumnos/images/slide3.png', fit: BoxFit.cover,),
-          
-          new Scaffold(
-            appBar: new AppBar(
+    new Scaffold(
+      appBar: new AppBar(
               
               title: new Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -96,40 +120,25 @@ class _MyHomePageState extends State<MyHomePage> {
               backgroundColor: const Color(0xFFB4C56C).withOpacity(0.0),
             ),
             backgroundColor: Colors.transparent,
-            body: new Stack(
-        children: <Widget>[
-          new BackdropFilter(
+      body: new Stack(
+         children: <Widget>[  
+             new BackdropFilter(
                 filter: new ui.ImageFilter.blur(
                   sigmaX: 0.0,
                   sigmaY: 0.0,
                 ),
                       child: new Transform.translate(
               offset: new Offset(0.0, MediaQuery.of(context).size.height * 0.08),
-              child: actividades == null ? Center(child: CircularProgressIndicator(),) : Card(
+              child: creditos == null ? Center(child: CircularProgressIndicator(),) : Card(
                 
                 shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
+                borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: 
+                  _getPage(currentPage),
+                  ),
               ),
-                  child: new ListView.builder(
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.all(0.0),
-                  scrollDirection: Axis.vertical,
-                  primary: true,
-                  itemCount: actividad.length,
-                  itemBuilder: (BuildContext content, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 10.0, left: 5),
-                                        child: AwesomeListItem(
-                          title: actividad[index].nombreActividad,
-                          content: actividad[index].definicion
-                          ),
-                    );
-                  },
-                ),
-              ),
-            ),
           ),
-
           new Transform.translate(
             offset: Offset(0.0, -56.0),
             
@@ -195,39 +204,131 @@ class _MyHomePageState extends State<MyHomePage> {
               
             ),
           )
-        ],
-      ),
-          /*bottomNavigationBar: CurvedNavigationBar(
-            backgroundColor: Colors.grey,
-            items: <Widget>[
-              Icon(Icons.local_activity, size: 40),
-              Icon(Icons.list, size: 40),
-              Icon(Icons.compare_arrows, size: 40),
-            ],
-            onTap: (index) {
-              //Handle button tap
-            },
-          ),*/   
-          bottomNavigationBar: FancyBottomNavigation(
-                  tabs: [
-                      TabData(iconData: Icons.home, title: "Inicio"),
-                      TabData(iconData: Icons.receipt, title: "Actividades"),
-                      TabData(iconData: Icons.check_circle, title: "Creditos"),
-                      TabData(iconData: Icons.insert_drive_file, title: "Documentos")
+         ]
+      ),    
+      bottomNavigationBar: FancyBottomNavigation(
+       tabs: [
+                      TabData(iconData: Icons.home, title: "Inicio",  onclick: () {
+                        final FancyBottomNavigationState fState =
+                            bottomNavigationKey.currentState;
+                        fState.setPage(0);
+                      }),
+                      TabData(iconData: Icons.receipt, title: "Actividades",  onclick: () {
+                final FancyBottomNavigationState fState =
+                    bottomNavigationKey.currentState;
+                fState.setPage(1);
+              }),
+                      TabData(iconData: Icons.check_circle, title: "Creditos",  onclick: () {
+                final FancyBottomNavigationState fState =
+                    bottomNavigationKey.currentState;
+                fState.setPage(2);
+              }),
+                      TabData(iconData: Icons.insert_drive_file, title: "Documentos",  onclick: () {
+                final FancyBottomNavigationState fState =
+                    bottomNavigationKey.currentState;
+                fState.setPage(3);
+              })
                   ],
-                  onTabChangedListener: (position) {
-                      setState(() {
-                      currentPage = position;
-                      });
-                  },
-              ),             
-          ),
-        ],
+        initialSelection: 0,
+        key: bottomNavigationKey,
+        onTabChangedListener: (position) {
+          setState(() {
+            currentPage = position;
+          });
+        },
+      )
+    ), ],
       )
     );
   }
-}
 
+  _getPage(int page) {
+    switch (page) {
+      case 0:
+        return Stack(
+        children: <Widget>[
+          new Card(
+            color: Colors.white,
+            child: new SingleChildScrollView(
+              child: new Html(
+                data: """
+                <img src="https://media.istockphoto.com/vectors/people-and-education-group-of-happy-students-with-books-vector-id639973478?k=6&m=639973478&s=612x612&w=0&h=N1-F692LMKhChk4KLo7usueIrbO0jBXfrbEopAbyl-Q=">
+               <div class="col-md my-auto"><!-- .my-auto vertically centers contents -->
+               <h2>Bienvenidos al Sistema Integral para Alumnos de la FACITE!</h2>
+						<p>Si eres estudiante del nivel profesional en la UAS, aquí deberás subir los documentos que acrediten tus Actividades de Libre Elección, las cuales deberás cumplir durante toda tu carrera profesional. </p>
+						<p>Desde aquí podrás:</p>
+						<ul>
+							<li>Subir nuevos documentos acreditables.</li>
+							<li>Ver tu historial de créditos acumulados.</li>
+							<li>Verificar tus créditos por cumplir.</li>
+							<li>Descargar tus documentos probatorios.</li>
+						</ul>
+            <p></p>
+						<h3>Nota: </h3>
+						<p>Si aún no tienes los datos de acceso, los puedes solicitar en el Depto. de Control Escolar de tu escuela o facultad.</p>
+						<div style="height:15px;"></div>
+						<!--<p><a class="btn btn-green-pro" href="signup-step1.html" role="button">Learn More</a></p>-->
+					</div>
+
+                """,
+                padding: EdgeInsets.all(40.0),
+                onLinkTap: (url) {
+                  print("Opening $url...");
+                },
+                customRender: (node, children) {
+                  if (node is dom.Element) {
+                    switch (node.localName) {
+                      case "custom_tag": // using this, you can handle custom tags in your HTML 
+                        return Column(children: children);
+                    }
+                  }
+                }),
+            )
+          )
+        ],
+      );
+      case 1:
+        return 
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            new Transform.translate(
+              offset: new Offset(0.0, MediaQuery.of(context).size.height * 0.08),
+              child: actividad_a == null ? Center(child: CircularProgressIndicator(),) : ListView.builder(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(0.0),
+                  scrollDirection: Axis.vertical,
+                  primary: true,
+                  itemCount: actividad.length,
+                  itemBuilder: (BuildContext content, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 10.0, left: 5),
+                                        child: AwesomeListItem(
+                          title: actividad_a[index].nombreActividad,
+                          content: actividad_a[index].definicion
+                          ),
+                    );
+                  },
+                ),
+            );
+      default:
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text("Creditos"),
+            RaisedButton(
+              child: Text(
+                "Creditos",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Theme.of(context).primaryColor,
+              onPressed: () {},
+            )
+          ],
+        );
+    }
+  }
+}
 class MyClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -245,52 +346,4 @@ class MyClipper extends CustomClipper<Path> {
   }
 }
 
-class AwesomeListItem extends StatefulWidget {
-  String title;
-  String content;
 
-
-  AwesomeListItem({this.title, this.content});
-
-  @override
-  _AwesomeListItemState createState() => new _AwesomeListItemState();
-}
-
-class _AwesomeListItemState extends State<AwesomeListItem> {
-  @override
-  Widget build(BuildContext context) {
-    return new Row(
-      children: <Widget>[
-        new Expanded(
-          child: new Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                new Text(
-                  widget.title,
-                  style: TextStyle(
-                      color: Colors.blueGrey,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold),
-                ),
-                new Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: new Text(
-                    widget.content,
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.normal,),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
