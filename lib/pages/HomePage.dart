@@ -310,24 +310,28 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   },
                 ),
+                ),
+              ],
             );
-      default:
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text("Creditos"),
-            RaisedButton(
-              child: Text(
-                "Creditos",
-                style: TextStyle(color: Colors.white),
-              ),
-              color: Theme.of(context).primaryColor,
-              onPressed: () {},
-            )
-          ],
-        );
-    }
+        
+          default:
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text("Creditos"),
+                RaisedButton(
+                  child: Text(
+                    "Creditos",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Theme.of(context).primaryColor,
+                  onPressed: () {},
+                )
+              ],
+            );
+      }
   }
+
 }
 class MyClipper extends CustomClipper<Path> {
   @override

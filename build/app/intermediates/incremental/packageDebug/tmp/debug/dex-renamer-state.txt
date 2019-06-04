@@ -1,4 +1,4 @@
-#Tue Jun 04 12:40:36 MDT 2019
+#Tue Jun 04 16:43:51 MDT 2019
 base.0=C\:\\src\\proyectos\\facite_alumnos-1\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex
