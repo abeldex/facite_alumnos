@@ -77,10 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
       var decodedJSON = jsonDecode(res.body);
       creditos = ModelCreditos.fromJson(decodedJSON);
       //print(home.toJson());
-      actividad = creditos.fACITEAPP.toList();
-      /*setState(() {
+      //actividad = creditos.fACITEAPP.toList();
+      setState(() {
         actividad = creditos.fACITEAPP.toList();
-      });*/
+      });
     }
 
     obtenerActividades() async {
@@ -89,10 +89,10 @@ class _MyHomePageState extends State<MyHomePage> {
       var decodedJSON = jsonDecode(res.body);
       actividades = ModelActividades.fromJson(decodedJSON);
       //print(home.toJson());
-      actividad_a = actividades.fACITEAPP.toList();
-      /*setState(() {
+      //actividad_a = actividades.fACITEAPP.toList();
+      setState(() {
         actividad_a = actividades.fACITEAPP.toList();
-      });*/
+      });
     }
 
     obtenerArchivos() async {
@@ -100,10 +100,10 @@ class _MyHomePageState extends State<MyHomePage> {
       var decodedJSON = jsonDecode(res.body);
       archivos = ModelArchivos.fromJson(decodedJSON);
       //print(archivos.toJson());
-      archivos_list = archivos.fACITEAPP.toList();
-      /*setState(() {
+      //archivos_list = archivos.fACITEAPP.toList();
+      setState(() {
         archivos_list = archivos.fACITEAPP.toList();
-      });*/
+      });
     }
  
   @override

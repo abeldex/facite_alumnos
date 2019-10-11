@@ -27,6 +27,8 @@ class _LoginState extends State<LoginPage> {
     'password' : Null
   };
 
+  
+
    //Metodo para realizar el login
   _login() async {
    final response = await http.get("http://facite.uas.edu.mx/alumnos/api/api_login.php?cuenta=${_loginData['email']}&password=${_loginData['password']}");
