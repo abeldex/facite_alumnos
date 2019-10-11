@@ -60,7 +60,7 @@ class _ActividadDetail extends State<ActividadDetail> {
             shape: BoxShape.circle,
             border: Border.all(color: Colors.white30),
           ),
-          margin: const EdgeInsets.only(top: 32.0, left: 16.0),
+          margin: const EdgeInsets.only(top: 40.0, left: 5.0),
           padding: const EdgeInsets.all(3.0),
           /*child: ClipOval(
             child: SvgPicture.network("https://image.flaticon.com/icons/svg/1039/1039328.svg"),
@@ -72,7 +72,7 @@ class _ActividadDetail extends State<ActividadDetail> {
 
       Widget _buildInfo(BuildContext context) {
         return Container(
-          margin: const EdgeInsets.only(top: 20.0, left: 30.0),
+          margin: const EdgeInsets.only(top: 50.0, left: 5.0),
           child: Padding(
             padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
             child: Column(
@@ -87,27 +87,34 @@ class _ActividadDetail extends State<ActividadDetail> {
                   ),
                   
                 ),
-                
+                 Container(
+                  color: Colors.white.withOpacity(0.85),
+                  margin: const EdgeInsets.symmetric(vertical: 5.0),
+                  width: 350.0,
+                  height: 1.0,
+                ),
                 Html(
                   data: "<table><tr><td>Credito(s) por evento: </td><td>"+creditos+"</td></tr><tr><td>Creditos Máximos: </td><td>"+creditosmax+" créditos</td></tr></table>",
                   defaultTextStyle: TextStyle( color: Colors.white,
                     height: 1.4, fontSize: 16),
                 ),
-                Container(
-                  color: Colors.white.withOpacity(0.85),
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  width: 350.0,
-                  height: 1.0,
-                ),
-                Text("Definicion: " ,
-                style: TextStyle(
-                    fontSize: 25.0,
-                    color: Colors.amber[200],
-                    fontWeight: FontWeight.w500,
-                  ),),
+               Text("Definicion: " ,
+                    style: TextStyle(
+                        fontSize: 25.0,
+                        color: Colors.amber[200],
+                        fontWeight: FontWeight.w800,
+                      ),),
+                Card(
+                   shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: new Column(
+                  children: <Widget>[
+                    
+                  
                    Html(
                         data: definicion,
-                        defaultTextStyle: TextStyle(color: Colors.white,
+                        defaultTextStyle: TextStyle(color: Colors.blueGrey,
                     height: 1.4, fontSize: 16, ),
                     ),   
                     Container(
@@ -115,24 +122,35 @@ class _ActividadDetail extends State<ActividadDetail> {
                   margin: const EdgeInsets.symmetric(vertical: 16.0),
                   width: 350.0,
                   height: 1.0,
-                ),        
+                )],
+                )),        
                     Text("Evidencias: " ,
                 style: TextStyle(
                     fontSize: 25.0,
                     color: Colors.amber[200],
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w800,
                   ),),
+                    Card(
+                   shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: new Column(
+                  children: <Widget>[
+                    
+                  
                    Html(
                         data: evidencias,
-                        defaultTextStyle: TextStyle( color: Colors.white,
-                    height: 1.4, fontSize: 16),
-                    ),  
+                        defaultTextStyle: TextStyle(color: Colors.blueGrey,
+                    height: 1.4, fontSize: 16, ),
+                    ),   
                     Container(
-                      color: Colors.white.withOpacity(0.85),
-                      margin: const EdgeInsets.symmetric(vertical: 16.0),
-                      width: 350.0,
-                      height: 1.0,
-                    ),
+                  color: Colors.white.withOpacity(0.85),
+                  margin: const EdgeInsets.symmetric(vertical: 16.0),
+                  width: 350.0,
+                  height: 1.0,
+                )],
+                )),        
+                    
                     ], 
             ),    
           ),

@@ -65,7 +65,7 @@ class _ArchivoDetail extends State<ArchivoDetail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               
-              _buildAvatar(),
+              //_buildAvatar(),
               _buildInfo(context),
               
             ],
@@ -93,104 +93,132 @@ class _ArchivoDetail extends State<ArchivoDetail> {
       }
 
       Widget _buildInfo(BuildContext context) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[ 
-                    RaisedButton(
-                onPressed: ()  => pathPDF == "" ?   Alert(
-                      context: context,
-                      //type: AlertType.info,
-                      title: "Descargando documento...",
-                      desc: "Espere unos segundos por favor",
-                      image: Image.network("http://190.107.23.94:807/BPM_Conservatorio/App_Themes/AzulCielo/Imagenes/procesando.gif", width: 50,),
-                      buttons: [
-                        DialogButton(
-                          child: Text(
-                            "Muy bien!",
-                            style: TextStyle(color: Colors.white, fontSize: 20,),
+        return Container(
+          margin: const EdgeInsets.only(top: 50.0, left: 5.0),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[ 
+                  Center(child: SvgPicture.asset("assets/img/pdf.svg", height: 80,),),
+                  RaisedButton(
+                  onPressed: ()  => pathPDF == "" ?   Alert(
+                        context: context,
+                        //type: AlertType.info,
+                        title: "Descargando documento...",
+                        desc: "Espere unos segundos por favor",
+                        image: Image.network("http://190.107.23.94:807/BPM_Conservatorio/App_Themes/AzulCielo/Imagenes/procesando.gif", width: 50,),
+                        buttons: [
+                          DialogButton(
+                            child: Text(
+                              "Muy bien!",
+                              style: TextStyle(color: Colors.white, fontSize: 20,),
+                            ),
+                             onPressed: () => Navigator.pop(context),
+                            width: 140,
                           ),
-                           onPressed: () => Navigator.pop(context),
-                          width: 140,
+                         
+                        ],
+                      ).show() 
+                      : Navigator.push(context,MaterialPageRoute(builder: (context) => PDFScreen(pathPDF, nombre)),),
+                  color: Colors.blueGrey,
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.picture_as_pdf,
+                          color: Colors.white,
                         ),
-                       
+                        SizedBox(
+                          width: 4.0,
+                        ),
+                        Text(
+                          "ABRIR DOCUMENTO",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ],
-                    ).show() 
-                    : Navigator.push(context,MaterialPageRoute(builder: (context) => PDFScreen(pathPDF, nombre)),),
-                color: Colors.blueGrey,
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.picture_as_pdf,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: 4.0,
-                      ),
-                      Text(
-                        "ABRIR DOCUMENTO",
-                        style: TextStyle(color: Colors.white),
-                      ),
+                    ),
+                  ),
+                ),
+                /*Text(
+                  nombre ,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0,
+                  ),
+                ),*/
+                Text(
+                  "Estado : [ " + estado + " ] ",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white.withOpacity(0.85),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Container(
+                  color: Colors.white.withOpacity(0.85),
+                  margin: const EdgeInsets.symmetric(vertical: 16.0),
+                  width: 350.0,
+                  height: 1.0,
+                ),
+                Text("Descripcion: " ,
+                style: TextStyle(
+                    fontSize: 25.0,
+                    color: Colors.amber[200],
+                    fontWeight: FontWeight.w800,
+                  ),),
+                Card(
+                   shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: new Column(
+                  children: <Widget>[
+                    
+                  
+                   Html(
+                        data: contenido,
+                        defaultTextStyle: TextStyle(color: Colors.blueGrey,
+                    height: 1.4, fontSize: 16, ),
+                    ),   
+                    Container(
+                  color: Colors.white.withOpacity(0.85),
+                  margin: const EdgeInsets.symmetric(vertical: 16.0),
+                  width: 350.0,
+                  height: 1.0,
+                )],
+                )),
+                Text("Observaciones: " ,
+                style: TextStyle(
+                    fontSize: 25.0,
+                    color: Colors.amber[200],
+                    fontWeight: FontWeight.w800,
+                  ),),
+                   Card(
+                   shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: new Column(
+                  children: <Widget>[
+                    
+                  
+                   Html(
+                        data: observaciones,
+                        defaultTextStyle: TextStyle(color: Colors.blueGrey,
+                    height: 1.4, fontSize: 16, ),
+                    ),   
+                    Container(
+                  color: Colors.white.withOpacity(0.85),
+                  margin: const EdgeInsets.symmetric(vertical: 16.0),
+                  width: 350.0,
+                  height: 1.0,
+                )],
+                )),           
                     ],
-                  ),
-                ),
-              ),
-              /*Text(
-                nombre ,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25.0,
-                ),
-              ),*/
-              Text(
-                "Estado : [ " + estado + " ] ",
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white.withOpacity(0.85),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Container(
-                color: Colors.white.withOpacity(0.85),
-                margin: const EdgeInsets.symmetric(vertical: 16.0),
-                width: 350.0,
-                height: 1.0,
-              ),
-              Text("Descripcion: " ,
-              style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white.withOpacity(0.85),
-                  fontWeight: FontWeight.w500,
-                ),),
-              Html(
-                      data: contenido,
-                      defaultTextStyle: TextStyle( color: Colors.white.withOpacity(0.85),
-                  height: 1.4, fontSize: 16),
-                  ),
-                   Container(
-                color: Colors.white.withOpacity(0.85),
-                margin: const EdgeInsets.symmetric(vertical: 16.0),
-                width: 350.0,
-                height: 1.0,
-              ),
-              Text("Observaciones: " ,
-              style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white.withOpacity(0.85),
-                  fontWeight: FontWeight.w500,
-                ),),
-                 Html(
-                      data: observaciones,
-                      defaultTextStyle: TextStyle( color: Colors.white.withOpacity(0.85),
-                  height: 1.4, fontSize: 16),
-                  ),           
-                  ],
+            ),
+            
           ),
-          
         );
         
       }

@@ -250,8 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     bottomNavigationKey.currentState;
                 fState.setPage(3);
               }),
-              
-                  ],
+              ],
         initialSelection: 0,
         key: bottomNavigationKey,
         onTabChangedListener: (position) {
