@@ -1,8 +1,12 @@
 
 import 'dart:ui' as ui;
 import 'package:facite_alumnos/models/ModelActividades.dart';
+import 'package:facite_alumnos/models/ModelArchivos.dart';
 import 'package:facite_alumnos/models/ModelCreditos.dart';
-import 'package:facite_alumnos/pages/actividades.dart';
+import 'package:facite_alumnos/utils/actividadDetails.dart';
+import 'package:facite_alumnos/utils/actividadesList.dart';
+import 'package:facite_alumnos/utils/archivoDetails.dart';
+import 'package:facite_alumnos/utils/archivosList.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -10,6 +14,7 @@ import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:facite_alumnos/globals.dart' as globals;
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 
 void main() => runApp(new MyApp());
@@ -23,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: new MyHomePage(title: 'Actividades de Libre Eleccion'),
+      home: new MyHomePage(title: 'Alumnos FACITE APP'),
     );
   }
 }
@@ -40,7 +45,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
     //para los creditos
     var url = "http://facite.uas.edu.mx/alumnos/api/ap_get_creditos.php?cuenta=" + "${globals.cuenta}";
-    
     ModelCreditos creditos;
     List<FACITEAPP> actividad;
 
@@ -49,6 +53,11 @@ class _MyHomePageState extends State<MyHomePage> {
     ModelActividades actividades;
     List<FACITEAPP_ACT> actividad_a;
 
+    //para los archivos
+    var urlArchivos = "http://facite.uas.edu.mx/alumnos/api/api_get_archivos.php?cuenta=" + "${globals.cuenta}";
+    ModelArchivos archivos;
+    List<FACITEAPP_ARCHIVOS> archivos_list;
+
     int currentPage = 0;
 
     GlobalKey bottomNavigationKey = GlobalKey();
@@ -56,20 +65,22 @@ class _MyHomePageState extends State<MyHomePage> {
     @override
       void initState() {
         super.initState();
-        obtenerDatos();
-        obtenerActividades() ;
+        obtenerCreditos();
+        obtenerActividades();
+        obtenerArchivos();
         //print(url);
       }
 
-    obtenerDatos() async {
+    obtenerCreditos() async {
     var res = await http.get(url);
-      print(res.body);
+      //print(res.body);
       var decodedJSON = jsonDecode(res.body);
       creditos = ModelCreditos.fromJson(decodedJSON);
       //print(home.toJson());
-      setState(() {
+      actividad = creditos.fACITEAPP.toList();
+      /*setState(() {
         actividad = creditos.fACITEAPP.toList();
-      });
+      });*/
     }
 
     obtenerActividades() async {
@@ -78,9 +89,21 @@ class _MyHomePageState extends State<MyHomePage> {
       var decodedJSON = jsonDecode(res.body);
       actividades = ModelActividades.fromJson(decodedJSON);
       //print(home.toJson());
-      setState(() {
+      actividad_a = actividades.fACITEAPP.toList();
+      /*setState(() {
         actividad_a = actividades.fACITEAPP.toList();
-      });
+      });*/
+    }
+
+    obtenerArchivos() async {
+    var res = await http.get(urlArchivos);
+      var decodedJSON = jsonDecode(res.body);
+      archivos = ModelArchivos.fromJson(decodedJSON);
+      //print(archivos.toJson());
+      archivos_list = archivos.fACITEAPP.toList();
+      /*setState(() {
+        archivos_list = archivos.fACITEAPP.toList();
+      });*/
     }
  
   @override
@@ -90,8 +113,8 @@ class _MyHomePageState extends State<MyHomePage> {
         fit: StackFit.expand,
         children: <Widget>[
 
-          new Image.asset('assets/img/blue_bg.png', fit: BoxFit.cover,),
-          //new Image.network('http://facite.uas.edu.mx/alumnos/images/slide3.png', fit: BoxFit.cover,),
+          new Image.asset('assets/img/bg.png', fit: BoxFit.cover,),
+          //new Image.network('http://facite.uas.edu.mx/alumnos/api/img/bg.png', fit: BoxFit.cover,),
     new Scaffold(
       appBar: new AppBar(
               
@@ -103,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 32,
                   ),
                   Container(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(0.0),
                           child: Text(widget.title,
                           style: TextStyle(color: Colors.white,  shadows: <Shadow>[
                             Shadow(
@@ -162,8 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             color: Colors.transparent,
                             image: new DecorationImage(
                               fit: BoxFit.fill,
-                              image: NetworkImage(
-                                  "http://facite.uas.edu.mx/alumnos/images/default.png"),
+                              image: NetworkImage("http://facite.uas.edu.mx/alumnos/images/default.png"),
                             ),
                           ),
                         ),
@@ -227,7 +249,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 final FancyBottomNavigationState fState =
                     bottomNavigationKey.currentState;
                 fState.setPage(3);
-              })
+              }),
+              
                   ],
         initialSelection: 0,
         key: bottomNavigationKey,
@@ -258,10 +281,9 @@ class _MyHomePageState extends State<MyHomePage> {
 						<p>Si eres estudiante del nivel profesional en la UAS, aquí deberás subir los documentos que acrediten tus Actividades de Libre Elección, las cuales deberás cumplir durante toda tu carrera profesional. </p>
 						<p>Desde aquí podrás:</p>
 						<ul>
-							<li>Subir nuevos documentos acreditables.</li>
+              <li>Consultar las actividades de libre elección disponibles</li>
 							<li>Ver tu historial de créditos acumulados.</li>
-							<li>Verificar tus créditos por cumplir.</li>
-							<li>Descargar tus documentos probatorios.</li>
+							<li>Ver el estado de tus documentos enviados.</li>
 						</ul>
             <p></p>
 						<h3>Nota: </h3>
@@ -288,66 +310,114 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       );
       case 1:
+        //obtener Actividades
         return 
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            new Transform.translate(
-              offset: new Offset(0.0, MediaQuery.of(context).size.height * 0.08),
-              child: actividad_a == null ? Center(child: CircularProgressIndicator(),) : ListView.builder(
+              actividad_a == null ? Center(child: CircularProgressIndicator(),) : 
+              ListView.builder(
                   shrinkWrap: true,
-                  padding: const EdgeInsets.all(0.0),
+                  padding: const EdgeInsets.all(5.0),
                   scrollDirection: Axis.vertical,
                   primary: true,
-                  itemCount: actividad.length,
+                  itemCount: actividad_a.length,
                   itemBuilder: (BuildContext content, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 10.0, left: 5),
-                                        child: AwesomeListItem(
-                          title: actividad_a[index].nombreActividad,
-                          content: actividad_a[index].definicion
+                     return new InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                            builder: (context) {
+                              return new ActividadDetail(nombre: actividad_a[index].nombreActividad, definicion: actividad_a[index].definicion, categoria: actividad_a[index].categoria, creditos: actividad_a[index].creditos, creditosmax: actividad_a[index].creditosmax, creditosmin: actividad_a[index].creditosmin, evidencias: actividad_a[index].evidencias,);
+                            },
                           ),
-                    );
+                        );
+                      },
+                    child: new Padding(
+                      padding: const EdgeInsets.only(top: 10.0, left: 5),
+                          child: ActividadesList(
+                          title: actividad_a[index].nombreActividad,
+                          content: actividad_a[index].definicion,
+                          
+                          ),
+                    ));
                   },
-                ),
-                ),
-              ],
-            );
+                );
         
-          default:
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text("Creditos"),
-                RaisedButton(
-                  child: Text(
-                    "Creditos",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: Theme.of(context).primaryColor,
-                  onPressed: () {},
+          case 2:
+            //obtenerCreditos();
+            return Container(
+              child: actividad == null ? Center(child: CircularProgressIndicator(),) : 
+                Center(child: 
+                Column(
+                  children: <Widget>[
+                    new Text("${actividad[0].creditos}",
+                            textAlign: TextAlign.center,
+                            textScaleFactor: 14,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey),
+                          ),
+                          new Divider(color: Colors.blueGrey,),
+                    new Text("Créditos Acumulados",
+                            textAlign: TextAlign.center,
+                            textScaleFactor: 1.2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueGrey),
+                    ),
+                    new Divider(color: Colors.blueGrey,),
+                    Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: new Html(data: """<blockquote>
+                        ${actividad[0].historial}</blockquote>
+                      """,
+                        linkStyle: const TextStyle(
+                          color: Colors.blue,
+                        ),
+                      ),
+                    )
+                  ],
                 )
-              ],
+                ),
             );
+            case 3:
+              //obtenerArchivos();
+              return archivos == null ? Center(child: CircularProgressIndicator(),) :
+              ListView.builder(
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(5.0),
+                scrollDirection: Axis.vertical,
+                primary: true,
+                // Let the ListView know how many items it needs to build
+                itemCount: archivos_list.length,
+                // Provide a builder function. This is where the magic happens! We'll
+                // convert each item into a Widget based on the type of item it is.
+                 itemBuilder: (BuildContext content, int index) {
+                   return new InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ArchivoDetail(
+                                      contenido: archivos_list[index].descripcion,
+                                      url: archivos_list[index].url_doc,
+                                      estado: archivos_list[index].estado,
+                                      nombre: archivos_list[index].nombre_doc,
+                                      observaciones: archivos_list[index].observaciones,
+                                  )));
+                      },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10.0, left: 5),
+                            child: ArchivosListItem(
+                            title: archivos_list[index].nombre_doc,
+                            content: archivos_list[index].descripcion, 
+                            estado: archivos_list[index].estado,
+                            tipo: archivos_list[index].tipo_doc,
+                            url : archivos_list[index].url_doc,
+                            observaciones: archivos_list[index].observaciones,
+                          ),
+                    ));
+                  },
+                );
       }
   }
-
 }
-class MyClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path p = new Path();
-    p.lineTo(size.width, 0.0);
-    p.lineTo(size.width, size.height / 4.75);
-    p.lineTo(0.0, size.height / 3.75);
-    p.close();
-    return p;
-  }
 
-  @override
-  bool shouldReclip(CustomClipper oldClipper) {
-    return true;
-  }
-}
+
+
 
 

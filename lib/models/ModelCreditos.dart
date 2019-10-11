@@ -24,18 +24,21 @@ class ModelCreditos {
 class FACITEAPP {
   String cuenta;
   String creditos;
+  String historial;
 
-  FACITEAPP({this.cuenta, this.creditos});
+  FACITEAPP({this.cuenta, this.creditos, this.historial});
 
   FACITEAPP.fromJson(Map<String, dynamic> json) {
     cuenta = json['cuenta'];
     creditos = json['creditos'];
+    historial = json['historial'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['cuenta'] = this.cuenta;
     data['creditos'] = this.creditos;
+    data['historial'] = this.historial;
     return data;
   }
 }

@@ -5,6 +5,16 @@ INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\main\AndroidMani
 INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\main\AndroidManifest.xml:1:1-33:12
 INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\main\AndroidManifest.xml:1:1-33:12
 MERGED from C:\src\proyectos\facite_alumnos-1\android\app\src\main\AndroidManifest.xml:1:1-33:12
+MERGED from [:path_provider] C:\src\proyectos\facite_alumnos-1\build\path_provider\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_full_pdf_viewer] C:\src\proyectos\facite_alumnos-1\build\flutter_full_pdf_viewer\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-7:12
+MERGED from [com.github.barteksc:android-pdf-viewer:2.8.2] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\android-pdf-viewer-2.8.2.aar\c6a9a8aa1094eb97cb7bf7b96c077aee\AndroidManifest.xml:2:1-11:12
+MERGED from [com.github.barteksc:pdfium-android:1.7.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\pdfium-android-1.7.1.aar\890a1e56d63f8e30991ea8b26daa9482\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\beede5e5d38be85dd74bb3f4680aefe6\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\149324fc30f39e1ddcbf942d05e56fed\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\62e00bfa413029372c16bd645826e4fd\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\d719157e5438ce4744669b27554ea301\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\7356ed13faed693cc6008b9d32b7d31e\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\bfbf5c8cc92b6d541356c1fc3a491ad7\AndroidManifest.xml:17:1-31:12
 INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\debug\AndroidManifest.xml:1:1-7:12
@@ -24,6 +34,18 @@ INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\debug\AndroidMan
 		ADDED from C:\src\proyectos\facite_alumnos-1\android\app\src\main\AndroidManifest.xml:1:11-69
 application
 ADDED from C:\src\proyectos\facite_alumnos-1\android\app\src\main\AndroidManifest.xml:9:5-32:19
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\beede5e5d38be85dd74bb3f4680aefe6\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\beede5e5d38be85dd74bb3f4680aefe6\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\149324fc30f39e1ddcbf942d05e56fed\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\149324fc30f39e1ddcbf942d05e56fed\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\62e00bfa413029372c16bd645826e4fd\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\62e00bfa413029372c16bd645826e4fd\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\d719157e5438ce4744669b27554ea301\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\d719157e5438ce4744669b27554ea301\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\7356ed13faed693cc6008b9d32b7d31e\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\7356ed13faed693cc6008b9d32b7d31e\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\bfbf5c8cc92b6d541356c1fc3a491ad7\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\bfbf5c8cc92b6d541356c1fc3a491ad7\AndroidManifest.xml:29:5-20
 	android:label
 		ADDED from C:\src\proyectos\facite_alumnos-1\android\app\src\main\AndroidManifest.xml:11:9-39
 	android:icon
@@ -64,8 +86,30 @@ uses-sdk
 INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\main\AndroidManifest.xml
 INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\main\AndroidManifest.xml
+MERGED from [:path_provider] C:\src\proyectos\facite_alumnos-1\build\path_provider\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] C:\src\proyectos\facite_alumnos-1\build\path_provider\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_full_pdf_viewer] C:\src\proyectos\facite_alumnos-1\build\flutter_full_pdf_viewer\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_full_pdf_viewer] C:\src\proyectos\facite_alumnos-1\build\flutter_full_pdf_viewer\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
+MERGED from [com.github.barteksc:android-pdf-viewer:2.8.2] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\android-pdf-viewer-2.8.2.aar\c6a9a8aa1094eb97cb7bf7b96c077aee\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.barteksc:android-pdf-viewer:2.8.2] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\android-pdf-viewer-2.8.2.aar\c6a9a8aa1094eb97cb7bf7b96c077aee\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.barteksc:pdfium-android:1.7.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\pdfium-android-1.7.1.aar\890a1e56d63f8e30991ea8b26daa9482\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.barteksc:pdfium-android:1.7.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\pdfium-android-1.7.1.aar\890a1e56d63f8e30991ea8b26daa9482\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\beede5e5d38be85dd74bb3f4680aefe6\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\beede5e5d38be85dd74bb3f4680aefe6\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\149324fc30f39e1ddcbf942d05e56fed\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\149324fc30f39e1ddcbf942d05e56fed\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\62e00bfa413029372c16bd645826e4fd\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\62e00bfa413029372c16bd645826e4fd\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\d719157e5438ce4744669b27554ea301\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\d719157e5438ce4744669b27554ea301\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\7356ed13faed693cc6008b9d32b7d31e\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\7356ed13faed693cc6008b9d32b7d31e\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\bfbf5c8cc92b6d541356c1fc3a491ad7\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\bfbf5c8cc92b6d541356c1fc3a491ad7\AndroidManifest.xml:21:5-23:58
 INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\debug\AndroidManifest.xml
 INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\debug\AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:support-v4:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\beede5e5d38be85dd74bb3f4680aefe6\AndroidManifest.xml:23:9-51
 	android:targetSdkVersion
 		INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\main\AndroidManifest.xml
 		INJECTED from C:\src\proyectos\facite_alumnos-1\android\app\src\debug\AndroidManifest.xml
@@ -76,3 +120,19 @@ uses-permission#android.permission.INTERNET
 ADDED from C:\src\proyectos\facite_alumnos-1\android\app\src\debug\AndroidManifest.xml:6:5-66
 	android:name
 		ADDED from C:\src\proyectos\facite_alumnos-1\android\app\src\debug\AndroidManifest.xml:6:22-64
+meta-data#android.support.VERSION
+ADDED from [com.android.support:support-v4:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\beede5e5d38be85dd74bb3f4680aefe6\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\149324fc30f39e1ddcbf942d05e56fed\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\149324fc30f39e1ddcbf942d05e56fed\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\62e00bfa413029372c16bd645826e4fd\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\62e00bfa413029372c16bd645826e4fd\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\d719157e5438ce4744669b27554ea301\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\d719157e5438ce4744669b27554ea301\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\7356ed13faed693cc6008b9d32b7d31e\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\7356ed13faed693cc6008b9d32b7d31e\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\bfbf5c8cc92b6d541356c1fc3a491ad7\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\bfbf5c8cc92b6d541356c1fc3a491ad7\AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:support-v4:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\beede5e5d38be85dd74bb3f4680aefe6\AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:support-v4:25.3.1] C:\Users\hp\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\beede5e5d38be85dd74bb3f4680aefe6\AndroidManifest.xml:26:9-47

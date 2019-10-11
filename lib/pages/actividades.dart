@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:facite_alumnos/models/ModelActividades.dart';
+import 'package:facite_alumnos/utils/actividadesList.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -101,7 +102,7 @@ class _ActividadesPageState extends State<ActividadesPage> {
                   itemBuilder: (BuildContext content, int index) {
                     return Padding(
                       padding: const EdgeInsets.only(top: 10.0, left: 5),
-                                        child: AwesomeListItem(
+                                        child: ActividadesList(
                           title: actividad[index].nombreActividad,
                           content: actividad[index].definicion
                           ),
@@ -216,52 +217,3 @@ class MyClipper extends CustomClipper<Path> {
   }
 }
 
-class AwesomeListItem extends StatefulWidget {
-  String title;
-  String content;
-
-
-  AwesomeListItem({this.title, this.content});
-
-  @override
-  _AwesomeListItemState createState() => new _AwesomeListItemState();
-}
-
-class _AwesomeListItemState extends State<AwesomeListItem> {
-  @override
-  Widget build(BuildContext context) {
-    return new Row(
-      children: <Widget>[
-        new Expanded(
-          child: new Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                new Text(
-                  widget.title,
-                  style: TextStyle(
-                      color: Colors.blueGrey,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold),
-                ),
-                new Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: new Text(
-                    widget.content,
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.normal,),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}

@@ -25,13 +25,23 @@ class FACITEAPP_ACT {
   String idActividad;
   String nombreActividad;
   String definicion;
+  String categoria;
+  String creditos;
+  String creditosmax;
+  String creditosmin;
+  String evidencias;
 
-  FACITEAPP_ACT({this.idActividad, this.nombreActividad, this.definicion});
+  FACITEAPP_ACT({this.idActividad, this.nombreActividad, this.definicion, this.categoria, this.creditos, this.creditosmax, this.creditosmin, this.evidencias});
 
   FACITEAPP_ACT.fromJson(Map<String, dynamic> json) {
     idActividad = json['id_actividad'];
     nombreActividad = json['nombre_actividad'];
     definicion = json['definicion'];
+    categoria = json['categoria'];
+    creditos = json['creditos'];
+    creditosmax = json['creditosmax'];
+    creditosmin = json['creditosmin'];
+    evidencias = json['evidencias'];
   }
 
   Map<String, dynamic> toJson() {
@@ -39,6 +49,11 @@ class FACITEAPP_ACT {
     data['id_actividad'] = this.idActividad;
     data['nombre_actividad'] = this.nombreActividad;
     data['definicion'] = this.definicion;
+    data['categoria'] = this.categoria;
+    data['creditos'] = this.creditos;
+    data['creditosmax'] = this.creditosmax;
+    data['creditosmin'] = this.creditosmin;
+    data['evidencias'] = this.evidencias;
     return data;
   }
 }

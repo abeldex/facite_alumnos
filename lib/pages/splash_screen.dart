@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:facite_alumnos/utils/my_navigator.dart';
+import 'package:facite_alumnos/globals.dart' as globals;
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -11,7 +12,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 5), () => MyNavigator.goToLogin(context));
+    if(globals.cuenta != null){
+      MyNavigator.goToHome(context);
+    }
+    else{
+      Timer(Duration(seconds: 3), () => MyNavigator.goToLogin(context));
+    }
+    
   }
 
   @override
@@ -21,8 +28,8 @@ class _SplashScreenState extends State<SplashScreen> {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage("assets/img/blue_bg.png"), fit: BoxFit.cover),
+            decoration: new BoxDecoration(
+              image: DecorationImage(image: new AssetImage("assets/img/bg.png"), fit: BoxFit.cover),
               color: Colors.blueGrey),
           ),
           Column(

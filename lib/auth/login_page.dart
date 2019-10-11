@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:facite_alumnos/models/ModelLogin.dart';
-import 'package:facite_alumnos/pages/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:facite_alumnos/utils/utils.dart';
 import 'package:facite_alumnos/globals.dart' as globals;
@@ -28,10 +27,6 @@ class _LoginState extends State<LoginPage> {
     'password' : Null
   };
 
-  
-
-  
-
    //Metodo para realizar el login
   _login() async {
    final response = await http.get("http://facite.uas.edu.mx/alumnos/api/api_login.php?cuenta=${_loginData['email']}&password=${_loginData['password']}");
@@ -55,12 +50,12 @@ class _LoginState extends State<LoginPage> {
                       //type: AlertType.info,
                       title: "Fallo al iniciar sesion",
                       desc: "Usuario o Contrasena Incorrectas",
-                      image: Image.asset("assets/img/error.gif", width: 50,),
+                      image: Image.asset("assets/img/problem.png", width: 50,),
                       buttons: [
                         DialogButton(
                           child: Text(
-                            "Cerrar!",
-                            style: TextStyle(color: Colors.white, fontSize: 20,),
+                            "Aceptar",
+                            style: TextStyle(color: Colors.black, fontSize: 20,),
                           ),
                            onPressed: () => Navigator.pop(context),
                           width: 140,
@@ -84,18 +79,30 @@ class _LoginState extends State<LoginPage> {
 _showDialog(String mensaje, String titulo) async {
     await showDialog<String>(
       context: context,
-      child: new AlertDialog(
-        contentPadding: const EdgeInsets.all(20.0),
-        title: new Text(titulo),
-        content: new Text(mensaje),
-        actions: <Widget>[
-          new FlatButton(
-              child: const Text('Cerrar'),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-        ],
-      ),
+      child: 
+    new AlertDialog(
+  
+          contentPadding: const EdgeInsets.all(20.0),
+  
+          title: new Text(titulo),
+  
+          content: new Text(mensaje),
+  
+          actions: <Widget>[
+  
+            new FlatButton(
+  
+                child: const Text('Cerrar'),
+                
+                onPressed: () {
+  
+                  Navigator.pop(context);
+  
+                }),
+  
+          ],
+  
+        ),
     );
   }
 
@@ -120,7 +127,7 @@ _showDialog(String mensaje, String titulo) async {
 
         style: TextStyle(color: Colors.white),
         textInputAction: TextInputAction.done,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.number,
         decoration: textDecoration('No. Cuenta'),
         onSaved: (String value) {
               _loginData['email'] = value;
@@ -130,12 +137,12 @@ _showDialog(String mensaje, String titulo) async {
 
     Widget _buildPasswordField() {
       return TextFormField(
+        obscureText: true,
         initialValue: '',  // used to set the initial value
         validator: (String value) {
           if (value.trim().isEmpty) return 'Por favor ingrese su Contraseña.';
         },
         style: TextStyle(color: Colors.white),
-        keyboardType: TextInputType.emailAddress,
         decoration: textDecoration('Contraseña'),
         onSaved: (String value) {
               _loginData['password'] = value;
