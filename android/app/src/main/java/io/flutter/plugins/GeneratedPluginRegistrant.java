@@ -3,6 +3,7 @@ package io.flutter.plugins;
 import io.flutter.plugin.common.PluginRegistry;
 import com.alveliu.flutterfullpdfviewer.FlutterFullPdfViewerPlugin;
 import io.flutter.plugins.pathprovider.PathProviderPlugin;
+import com.ethras.simplepermissions.SimplePermissionsPlugin;
 
 /**
  * Generated file. Do not edit.
@@ -14,6 +15,7 @@ public final class GeneratedPluginRegistrant {
     }
     FlutterFullPdfViewerPlugin.registerWith(registry.registrarFor("com.alveliu.flutterfullpdfviewer.FlutterFullPdfViewerPlugin"));
     PathProviderPlugin.registerWith(registry.registrarFor("io.flutter.plugins.pathprovider.PathProviderPlugin"));
+    SimplePermissionsPlugin.registerWith(registry.registrarFor("com.ethras.simplepermissions.SimplePermissionsPlugin"));
   }
 
   private static boolean alreadyRegisteredWith(PluginRegistry registry) {

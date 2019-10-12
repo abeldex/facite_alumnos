@@ -1,13 +1,15 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:facite_alumnos/utils/PDFScreen.dart';
-import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:simple_permissions/simple_permissions.dart';
+import 'package:flutter/services.dart';
+
 
 class ArchivoDetail extends StatefulWidget {
   final String nombre;
@@ -25,6 +27,8 @@ class ArchivoDetail extends StatefulWidget {
 }
 
 class _ArchivoDetail extends State<ArchivoDetail> {
+    String _platformVersion = 'Unknown';
+    Permission permission;
     final String nombre;
     final String estado;
     final String contenido;
@@ -37,27 +41,64 @@ class _ArchivoDetail extends State<ArchivoDetail> {
    @override
       void initState() {
         super.initState();
+        initPlatformState();
         bajarArchivo().then((f) {
           setState(() {
             pathPDF = f.path;
-            print(pathPDF);
+            print(pathPDF); 
+            Navigator.push(context,MaterialPageRoute(builder: (context) => PDFScreen(pathPDF, nombre)));
             //Navigator.pop(context);
             //Navigator.push(context,MaterialPageRoute(builder: (context) => PDFScreen(pathPDF, rev.bookTitle)),);
           });
         });
     }
 
-    Future<File> bajarArchivo() async {
-    //final url = "${url}";
-    final filename = url.substring(url.lastIndexOf("/") + 1);
-    var request = await HttpClient().getUrl(Uri.parse(url));
-    var response = await request.close();
-    var bytes = await consolidateHttpClientResponseBytes(response);
-    String dir = (await getApplicationDocumentsDirectory()).path;
-        File file = new File('$dir/$filename');
-        await file.writeAsBytes(bytes);
-        return file;
+    // Platform messages are asynchronous, so we initialize in an async method.
+  initPlatformState() async {
+    String platformVersion;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      platformVersion = await SimplePermissions.platformVersion;
+    } on PlatformException {
+      platformVersion = 'Failed to get platform version.';
     }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _platformVersion = platformVersion;
+    });
+  }
+
+    Future<File> bajarArchivo() async {
+      PermissionStatus permissionResult = await SimplePermissions.requestPermission(Permission.WriteExternalStorage);
+      PermissionStatus permissionResult2 = await SimplePermissions.requestPermission(Permission.ReadExternalStorage);
+      if (permissionResult == PermissionStatus.authorized && permissionResult2 == PermissionStatus.authorized){
+      //final url = "${url}";
+      final filename = url.substring(url.lastIndexOf("/") + 1);
+      var request = await HttpClient().getUrl(Uri.parse(url));
+      var response = await request.close();
+      var bytes = await consolidateHttpClientResponseBytes(response);
+      String dir = (await getApplicationDocumentsDirectory()).path;
+          File file = new File('$dir/$filename');
+          await file.writeAsBytes(bytes);
+          return file;
+      }
+    }
+
+    void _showToast(BuildContext context) {
+    final scaffold = Scaffold.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: const Text('Added to favorite'),
+        action: SnackBarAction(
+            label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }
 
     Widget _buildContent(BuildContext context) {
         return SingleChildScrollView(

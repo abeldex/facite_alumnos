@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\src\\proyectos\\facite_alumnos-1\\build\\simple_permissions\\intermediates\\res\\merged\\release\\layout-v21\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\hp\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\f6650a5fac016d6fb2b9cda3010309ae\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "C:\\src\\proyectos\\facite_alumnos-1\\build\\simple_permissions\\intermediates\\res\\merged\\release\\layout-v21\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\hp\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\f6650a5fac016d6fb2b9cda3010309ae\\res\\layout-v21\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "C:\\src\\proyectos\\facite_alumnos-1\\build\\simple_permissions\\intermediates\\res\\merged\\release\\layout-v21\\notification_action.xml",
+        "source": "C:\\Users\\hp\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\f6650a5fac016d6fb2b9cda3010309ae\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "C:\\src\\proyectos\\facite_alumnos-1\\build\\simple_permissions\\intermediates\\res\\merged\\release\\layout-v21\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\hp\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\f6650a5fac016d6fb2b9cda3010309ae\\res\\layout-v21\\notification_template_custom_big.xml"
+    }
+]
